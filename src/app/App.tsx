@@ -1,13 +1,21 @@
 import Canva from "@/components/Canva";
 import Sidebar from "@/components/sidebar";
-import { generateCircleOutlinePixels } from "@/lib/func/circulo";
+import { type Point } from "@/lib/func/bezier";
+import { rasterizePolyline } from "@/lib/func/polilinha";
 
 function App() {
 
-  const circlePixels = generateCircleOutlinePixels(10, 7, 3);
+  const points: Point[] = [
+    { x: 10, y: 10 },
+    { x: 50, y: 80 },
+    { x: 90, y: 20 },
+    { x: 130, y: 100 }
+  ];
+
+  const pixels = rasterizePolyline(points);
   return (
     <div className="flex">
-      <Canva pixels={circlePixels} />
+      <Canva pixels={pixels} />
       <Sidebar />
     </div>
   );
