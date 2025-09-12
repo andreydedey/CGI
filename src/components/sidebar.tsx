@@ -17,10 +17,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import { useEffect } from "react";
+import type { Point } from "@/lib/func/bezier";
 
-const SideBar: React.FC = () => {
+interface sidebarProps {
+  onFormChange: (data: Point[]) => void;
+}
+
+const SideBar: React.FC<sidebarProps> = ({ onFormChange }) => {
   const form = useForm();
+  const formData = form.watch();
   const algorithm = form.watch("algorithm");
+
+  useEffect(() => {
+    onFormChange(formData);
+  }, [formData, onFormChange]);
 
   return (
     <div className="h-screen w-[20%] bg-slate-900 flex flex-col gap-8 p-8 overflow-y-auto">
@@ -64,9 +75,6 @@ const SideBar: React.FC = () => {
                         <SelectItem value="polygon_clipping">
                           Recorte de Polígono
                         </SelectItem>
-                        <SelectItem value="polygon_clipping">
-                          Recorte de Polígono
-                        </SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -76,7 +84,7 @@ const SideBar: React.FC = () => {
             )}
           />
           {algorithm === "circle" && (
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4">
               <FormField
                 control={form.control}
                 name="raio"
@@ -119,7 +127,7 @@ const SideBar: React.FC = () => {
             </div>
           )}
           {algorithm === "bresenham" && (
-            <>
+            <div className="flex flex-col gap-4">
               <div className="flex gap-4">
                 <FormField
                   control={form.control}
@@ -176,10 +184,10 @@ const SideBar: React.FC = () => {
                   )}
                 />
               </div>
-            </>
+            </div>
           )}
           {algorithm === "curve" && (
-            <>
+            <div className="flex flex-col gap-4">
               <div className="flex gap-4">
                 <FormField
                   control={form.control}
@@ -292,10 +300,10 @@ const SideBar: React.FC = () => {
                   )}
                 />
               </div>
-            </>
+            </div>
           )}
           {algorithm === "recursive_fill" && (
-            <>
+            <div className="flex flex-col gap-4">
               <div className="flex gap-4">
                 <FormField
                   control={form.control}
@@ -344,10 +352,10 @@ const SideBar: React.FC = () => {
               <div className="text-white text-sm mt-2">
                 * O preenchimento será feito em um polígono pré-desenhado.
               </div>
-            </>
+            </div>
           )}
           {algorithm && (
-            <>
+            <div className="flex flex-col gap-4">
               <FormField
                 control={form.control}
                 name="angle"
@@ -355,7 +363,7 @@ const SideBar: React.FC = () => {
                   <FormItem>
                     <FormLabel className="text-white">Ângulo (graus)</FormLabel>
                     <FormControl>
-                      <>
+                      <div>
                         <Input
                           className="text-black bg-white mb-2"
                           type="number"
@@ -372,7 +380,7 @@ const SideBar: React.FC = () => {
                           step={1}
                           className="[&_[data-state='active']]:bg-blue-500"
                         />
-                      </>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -423,7 +431,7 @@ const SideBar: React.FC = () => {
                       ΔX (Translação)
                     </FormLabel>
                     <FormControl>
-                      <>
+                      <div>
                         <Input
                           className="text-black bg-white mb-2"
                           type="number"
@@ -437,7 +445,7 @@ const SideBar: React.FC = () => {
                           step={1}
                           className="[&_[data-state='active']]:bg-blue-500"
                         />
-                      </>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -452,7 +460,7 @@ const SideBar: React.FC = () => {
                       ΔY (Translação)
                     </FormLabel>
                     <FormControl>
-                      <>
+                      <div>
                         <Input
                           className="text-black bg-white mb-2"
                           type="number"
@@ -466,7 +474,7 @@ const SideBar: React.FC = () => {
                           step={1}
                           className="[&_[data-state='active']]:bg-blue-500"
                         />
-                      </>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -480,7 +488,7 @@ const SideBar: React.FC = () => {
                   <FormItem>
                     <FormLabel className="text-white">SX (Escala X)</FormLabel>
                     <FormControl>
-                      <>
+                      <div>
                         <Input
                           className="text-black bg-white mb-2"
                           type="number"
@@ -494,7 +502,7 @@ const SideBar: React.FC = () => {
                           step={0.1}
                           className="[&_[data-state='active']]:bg-blue-500"
                         />
-                      </>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -507,7 +515,7 @@ const SideBar: React.FC = () => {
                   <FormItem>
                     <FormLabel className="text-white">SY (Escala Y)</FormLabel>
                     <FormControl>
-                      <>
+                      <div>
                         <Input
                           className="text-black bg-white mb-2"
                           type="number"
@@ -521,7 +529,7 @@ const SideBar: React.FC = () => {
                           step={0.1}
                           className="[&_[data-state='active']]:bg-blue-500"
                         />
-                      </>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -563,7 +571,7 @@ const SideBar: React.FC = () => {
                   )}
                 />
               </div>
-            </>
+            </div>
           )}
         </form>
       </Form>
