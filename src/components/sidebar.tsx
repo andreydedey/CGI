@@ -355,15 +355,24 @@ const SideBar: React.FC = () => {
                   <FormItem>
                     <FormLabel className="text-white">Ângulo (graus)</FormLabel>
                     <FormControl>
-                      <Slider
-                        value={[field.value ?? 0]}
-                        onValueChange={(vals) => field.onChange(vals[0])}
-                        max={100}
-                        step={1}
-                        className="h-3 w-full rounded-full bg-gray-700"
-                      >
-                        <div className="bg-blue-500 h-full rounded-full" />
-                      </Slider>
+                      <>
+                        <Input
+                          className="text-black bg-white mb-2"
+                          type="number"
+                          value={field.value ?? 0}
+                          onChange={(e) =>
+                            field.onChange(Number(e.target.value))
+                          }
+                        />
+                        <Slider
+                          value={[field.value ?? 0]}
+                          onValueChange={(vals) => field.onChange(vals[0])}
+                          min={0}
+                          max={360}
+                          step={1}
+                          className="[&_[data-state='active']]:bg-blue-500"
+                        />
+                      </>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
