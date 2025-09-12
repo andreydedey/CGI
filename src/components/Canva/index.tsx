@@ -50,5 +50,5 @@ export default function Canva({
         });
     }, [width, height, cellSize, pixels]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas className="flex-1" ref={canvasRef} />;
 }
