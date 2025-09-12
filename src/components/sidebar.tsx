@@ -5,9 +5,9 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormDescription,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -19,6 +19,9 @@ import {
 
 const SideBar: React.FC = () => {
   const form = useForm();
+  const algorithm = form.watch("algorithm");
+
+  console.log(algorithm);
 
   return (
     <div className="h-screen w-[20%] bg-slate-900 flex flex-col gap-8 p-8">
@@ -33,7 +36,7 @@ const SideBar: React.FC = () => {
         >
           <FormField
             control={form.control}
-            name="algoritmo"
+            name="algorithm"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-white">
@@ -46,11 +49,25 @@ const SideBar: React.FC = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                        <SelectItem value="bresenham">Bresenham</SelectItem>
+                        <SelectItem value="circle">Círculos</SelectItem>
+                        <SelectItem value="curve">Curvas de Bezier</SelectItem>
+                        <SelectItem value="polilinha">Polilinha</SelectItem>
+                        <SelectItem value="recursive_fill">
+                          Preenchimento recursivo
+                        </SelectItem>
+                        <SelectItem value="recursive_scan">
+                          Preenchimento por varredura
+                        </SelectItem>
+                        <SelectItem value="line_clipping">
+                          Recorte de linha
+                        </SelectItem>
+                        <SelectItem value="polygon_clipping">
+                          Recorte de Polígono
+                        </SelectItem>
+                        <SelectItem value="polygon_clipping">
+                          Recorte de Polígono
+                        </SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -59,6 +76,21 @@ const SideBar: React.FC = () => {
               </FormItem>
             )}
           />
+          {algorithm === "circle" && (
+            <FormField
+              control={form.control}
+              name="x"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-white">Raio</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Raio" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
         </form>
       </Form>
     </div>
