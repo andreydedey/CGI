@@ -1,57 +1,55 @@
 import { useRef, useEffect } from "react";
 
-export default function CanvasComGrade() {
+interface PixelGridProps {
+    width?: number; 
+    height?: number;
+    cellSize?: number; 
+    pixels?: { x: number; y: number; color: string }[]; 
+}
+
+export default function PixelGrid({
+    width = 800,
+    height = 600,
+    cellSize = 15,
+    pixels = [],
+}: PixelGridProps) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
+        canvas.width = width;
+        canvas.height = height;
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        const width = canvas.width;
-        const height = canvas.height;
-        const cellSize = 20;
-
         ctx.clearRect(0, 0, width, height);
 
-        ctx.strokeStyle = "#bbb";
-        ctx.lineWidth = 1;
-
-        for (let x = 0; x <= width; x += cellSize) {
+        ctx.strokeStyle = "#ccc";
+        for (let x = 0; x < width; x += cellSize) {
             ctx.beginPath();
-            ctx.moveTo(x + 0.5, 0);
-            ctx.lineTo(x + 0.5, height);
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, height);
+            ctx.stroke();
+        }
+        for (let y = 0; y < height; y += cellSize) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(width, y);
             ctx.stroke();
         }
 
-        for (let y = 0; y <= height; y += cellSize) {
-            ctx.beginPath();
-            ctx.moveTo(0, y + 0.5);
-            ctx.lineTo(width, y + 0.5);
-            ctx.stroke();
-        }
-
-        ctx.strokeStyle = "#000";
-        ctx.beginPath();
-        ctx.moveTo(width / 2 + 0.5, 0);
-        ctx.lineTo(width / 2 + 0.5, height);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(0, height / 2 + 0.5);
-        ctx.lineTo(width, height / 2 + 0.5);
-        ctx.stroke();
-
-    }, []);
+        pixels.forEach(({ x, y, color }) => {
+            ctx.fillStyle = color;
+            ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        });
+    }, [width, height, cellSize, pixels]);
 
     return (
         <canvas
             ref={canvasRef}
-            width={800}
-            height={600}
-            style={{ border: "1px solid black", display: "block", margin: "20px auto" }}
+            style={{ border: "1px solid black", width: "80vw", height: "100vh" }}
         />
     );
 }
