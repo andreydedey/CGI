@@ -1,15 +1,16 @@
 import { useRef, useEffect } from "react";
+import type { Pixel } from "./config/pixel";
 
 interface PixelGridProps {
-    width?: number; 
+    width?: number;
     height?: number;
-    cellSize?: number; 
-    pixels?: { x: number; y: number; color: string }[]; 
+    cellSize?: number;
+    pixels?: Pixel[];
 }
 
-export default function PixelGrid({
+export default function Canva({
     width = 800,
-    height = 600,
+    height = 400,
     cellSize = 15,
     pixels = [],
 }: PixelGridProps) {
@@ -27,22 +28,25 @@ export default function PixelGrid({
         ctx.clearRect(0, 0, width, height);
 
         ctx.strokeStyle = "#ccc";
-        for (let x = 0; x < width; x += cellSize) {
+        for (let x = 0; x <= width; x += cellSize) {
             ctx.beginPath();
             ctx.moveTo(x, 0);
             ctx.lineTo(x, height);
             ctx.stroke();
         }
-        for (let y = 0; y < height; y += cellSize) {
+        for (let y = 0; y <= height; y += cellSize) {
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(width, y);
             ctx.stroke();
         }
 
-        pixels.forEach(({ x, y, color }) => {
-            ctx.fillStyle = color;
-            ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        pixels.forEach(({ x, y }) => {
+            ctx.fillStyle = "blue";
+            const canvasX = x * cellSize; 
+            const canvasY = height - (y + 1) * cellSize + 5;
+            const size = cellSize - 1; 
+            ctx.fillRect(canvasX, canvasY, size, size);
         });
     }, [width, height, cellSize, pixels]);
 
