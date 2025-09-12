@@ -31,7 +31,7 @@ const SideBar: React.FC = () => {
       </div>
       <Form {...form}>
         <form
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-4"
           onSubmit={form.handleSubmit((data) => console.log(data))}
         >
           <FormField
@@ -77,19 +77,47 @@ const SideBar: React.FC = () => {
             )}
           />
           {algorithm === "circle" && (
-            <FormField
-              control={form.control}
-              name="x"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-white">Raio</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Raio" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <>
+              <FormField
+                control={form.control}
+                name="raio"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Raio</FormLabel>
+                    <FormControl>
+                      <Input className="text-black bg-white" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="centroX"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Centro X</FormLabel>
+                    <FormControl>
+                      <Input className="text-black bg-white" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="centroY"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Centro Y</FormLabel>
+                    <FormControl>
+                      <Input className="text-black bg-white" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </>
           )}
         </form>
       </Form>
