@@ -6,7 +6,7 @@ function App() {
 
   const pixels = bresenhamLine(1, 2, 3, 4);
   return (
-    <div className="flex ">
+    <div className="flex gap-4">
       <Canva pixels={pixels} />
       <Sidebar />
     </div>

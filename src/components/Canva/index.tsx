@@ -14,18 +14,18 @@ export default function Canva({
     cellSize = 15,
     pixels = [],
 }: PixelGridProps) {
-    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-        ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width, height);
 
         ctx.strokeStyle = "#ccc";
         for (let x = 0; x <= width; x += cellSize) {
@@ -50,11 +50,5 @@ export default function Canva({
         });
     }, [width, height, cellSize, pixels]);
 
-    return (
-        <canvas
-            className="w-full"
-            ref={canvasRef}
-            style={{ border: "1px solid black" }}
-        />
-    );
+  return <canvas ref={canvasRef} />;
 }
