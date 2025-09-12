@@ -1,26 +1,18 @@
 import Canva from "@/components/Canva";
 import Sidebar from "@/components/sidebar";
-import { bresenhamLine } from "@/lib/func/bresenham";
+import { generateCircleOutlinePixels } from "@/lib/func/circulo";
 
 function App() {
-<<<<<<< HEAD
 
-  const pixels = bresenhamLine(1, 2, 3, 4);
+  const circlePixels = generateCircleOutlinePixels(10, 7, 3);
   return (
-    <div className="flex gap-4">
-      <Canva pixels={pixels} />
-=======
-  // const handleFormChange = (data) => {
-
-  // }
-
-  return (
-    <div className="flex gap-4 h-screen">
-      <Canva />
->>>>>>> main
+    <div className="flex">
+      <Canva pixels={circlePixels} />
       <Sidebar />
     </div>
   );
 }
 
 export default App;
+
+
