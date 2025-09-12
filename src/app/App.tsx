@@ -1,21 +1,20 @@
 import Canva from "@/components/Canva";
 import Sidebar from "@/components/sidebar";
 import { type Point } from "@/lib/func/bezier";
-import { rasterizePolyline } from "@/lib/func/polilinha";
+import { cohenSutherlandClip, type Rect } from "@/lib/func/recorte_linha";
 
 function App() {
 
-  const points: Point[] = [
-    { x: 10, y: 10 },
-    { x: 50, y: 80 },
-    { x: 90, y: 20 },
-    { x: 130, y: 100 }
-  ];
+  const rect: Rect = { xmin: 10, ymin: 10, xmax: 80, ymax: 60 };
 
-  const pixels = rasterizePolyline(points);
+  const lineStart: Point = { x: 0, y: 20 };
+  const lineEnd: Point = { x: 100, y: 50 };
+
+  const clipped = cohenSutherlandClip(lineStart, lineEnd, rect);
+
   return (
     <div className="flex">
-      <Canva pixels={pixels} />
+      <Canva pixels={clipped} />
       <Sidebar />
     </div>
   );
