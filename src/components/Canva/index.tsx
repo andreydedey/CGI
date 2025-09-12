@@ -48,8 +48,9 @@ export default function PixelGrid({
 
     return (
         <canvas
+            className="w-full"
             ref={canvasRef}
-            style={{ border: "1px solid black", width: "80vw", height: "100vh" }}
+            style={{ border: "1px solid black" }}
         />
     );
 }
