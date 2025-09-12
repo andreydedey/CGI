@@ -16,15 +16,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 
 const SideBar: React.FC = () => {
   const form = useForm();
   const algorithm = form.watch("algorithm");
 
-  console.log(algorithm);
-
   return (
-    <div className="h-screen w-[20%] bg-slate-900 flex flex-col gap-8 p-8">
+    <div className="h-screen w-[20%] bg-slate-900 flex flex-col gap-8 p-8 overflow-y-auto">
       <div className="flex flex-col gap-4">
         <h2 className="text-white text-center">CONFIGURAÇÕES</h2>
         <h2 className="text-white text-center">PARÂMETROS</h2>
@@ -77,7 +76,7 @@ const SideBar: React.FC = () => {
             )}
           />
           {algorithm === "circle" && (
-            <>
+            <div className="flex gap-4">
               <FormField
                 control={form.control}
                 name="raio"
@@ -117,6 +116,444 @@ const SideBar: React.FC = () => {
                   </FormItem>
                 )}
               />
+            </div>
+          )}
+          {algorithm === "bresenham" && (
+            <>
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_start"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Inicial</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_start"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Inicial</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_final"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Final</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_final"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Final</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </>
+          )}
+          {algorithm === "curve" && (
+            <>
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_start"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Inicial</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_start"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Inicial</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_control1"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Controle 1</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_control1"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Controle 1</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_control2"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Controle 2</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_control2"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Controle 2</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_final"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Final</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_final"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Final</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </>
+          )}
+          {algorithm === "recursive_fill" && (
+            <>
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_seed"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Semente</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_seed"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Semente</FormLabel>
+                      <FormControl>
+                        <Input className="text-black bg-white" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="cor"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Cor</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="text-black bg-white"
+                        {...field}
+                        placeholder="#FF0000"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="text-white text-sm mt-2">
+                * O preenchimento será feito em um polígono pré-desenhado.
+              </div>
+            </>
+          )}
+          {algorithm && (
+            <>
+              <FormField
+                control={form.control}
+                name="angle"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">Ângulo (graus)</FormLabel>
+                    <FormControl>
+                      <Slider
+                        value={[field.value ?? 0]}
+                        onValueChange={(vals) => field.onChange(vals[0])}
+                        max={100}
+                        step={1}
+                        className="h-3 w-full rounded-full bg-gray-700"
+                      >
+                        <div className="bg-blue-500 h-full rounded-full" />
+                      </Slider>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_pivot"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Pivô</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="text-black bg-white"
+                          type="number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_pivot"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Pivô</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="text-black bg-white"
+                          type="number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="dx"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">
+                      ΔX (Translação)
+                    </FormLabel>
+                    <FormControl>
+                      <>
+                        <Input
+                          className="text-black bg-white mb-2"
+                          type="number"
+                          {...field}
+                        />
+                        <Slider
+                          value={[field.value ?? 0]}
+                          onValueChange={(vals) => field.onChange(vals[0])}
+                          min={-100}
+                          max={100}
+                          step={1}
+                          className="[&_[data-state='active']]:bg-blue-500"
+                        />
+                      </>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="dy"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">
+                      ΔY (Translação)
+                    </FormLabel>
+                    <FormControl>
+                      <>
+                        <Input
+                          className="text-black bg-white mb-2"
+                          type="number"
+                          {...field}
+                        />
+                        <Slider
+                          value={[field.value ?? 0]}
+                          onValueChange={(vals) => field.onChange(vals[0])}
+                          min={-100}
+                          max={100}
+                          step={1}
+                          className="[&_[data-state='active']]:bg-blue-500"
+                        />
+                      </>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="sx"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">SX (Escala X)</FormLabel>
+                    <FormControl>
+                      <>
+                        <Input
+                          className="text-black bg-white mb-2"
+                          type="number"
+                          {...field}
+                        />
+                        <Slider
+                          value={[field.value ?? 1]}
+                          onValueChange={(vals) => field.onChange(vals[0])}
+                          min={0}
+                          max={10}
+                          step={0.1}
+                          className="[&_[data-state='active']]:bg-blue-500"
+                        />
+                      </>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="sy"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">SY (Escala Y)</FormLabel>
+                    <FormControl>
+                      <>
+                        <Input
+                          className="text-black bg-white mb-2"
+                          type="number"
+                          {...field}
+                        />
+                        <Slider
+                          value={[field.value ?? 1]}
+                          onValueChange={(vals) => field.onChange(vals[0])}
+                          min={0}
+                          max={10}
+                          step={0.1}
+                          className="[&_[data-state='active']]:bg-blue-500"
+                        />
+                      </>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex gap-4">
+                <FormField
+                  control={form.control}
+                  name="x_fixed"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">X Fixo</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="text-black bg-white"
+                          type="number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="y_fixed"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white">Y Fixo</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="text-black bg-white"
+                          type="number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </>
           )}
         </form>
