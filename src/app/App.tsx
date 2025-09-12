@@ -1,9 +1,10 @@
+import Canva from "@/components/Canva";
 import Sidebar from "@/components/sidebar";
 
 function App() {
   return (
-    <div className="flex">
-      <div className="flex-1">canvas</div>
+    <div className="flex ">
+      <Canva />
       <Sidebar />
     </div>
   );
