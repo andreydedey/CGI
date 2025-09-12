@@ -1,17 +1,18 @@
 import Canva from "@/components/Canva";
 import Sidebar from "@/components/sidebar";
+import { generateCircleOutlinePixels } from "@/lib/func/circulo";
 
 function App() {
-  // const handleFormChange = (data) => {
 
-  // }
-
+  const circlePixels = generateCircleOutlinePixels(10, 7, 3);
   return (
-    <div className="flex gap-4 h-screen">
-      <Canva />
+    <div className="flex">
+      <Canva pixels={circlePixels} />
       <Sidebar />
     </div>
   );
 }
 
 export default App;
+
+
