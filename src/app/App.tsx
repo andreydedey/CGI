@@ -1,7 +1,6 @@
 import Canva from "@/components/Canva";
 import Sidebar from "@/components/sidebar";
 import { type Point } from "@/lib/func/bezier";
-import { rasterizePolyline } from "@/lib/func/polilinha";
 import { useState } from "react";
 
 function App() {
@@ -14,10 +13,9 @@ function App() {
     setPoints(points);
   };
 
-  const pixels = rasterizePolyline(points);
   return (
     <div className="flex">
-      <Canva pixels={pixels} />
+      <Canva pixels={points}/>
       <Sidebar onFormChange={handleFormChange} />
     </div>
   );
