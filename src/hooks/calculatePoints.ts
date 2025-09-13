@@ -45,21 +45,21 @@ export function useCalculatePoints(formData: any) {
       }
     }
 
-    if (algorithm === "bezier") {
+    if (algorithm === "curve") {
       if (
-        formData.x_inicial !== undefined &&
-        formData.y_inicial !== undefined &&
-        formData.x_controle1 !== undefined &&
-        formData.y_controle1 !== undefined &&
-        formData.x_controle2 !== undefined &&
-        formData.y_controle2 !== undefined &&
+        formData.x_start !== undefined &&
+        formData.y_start !== undefined &&
+        formData.x_control1 !== undefined &&
+        formData.y_control1 !== undefined &&
+        formData.x_control2 !== undefined &&
+        formData.y_control2 !== undefined &&
         formData.x_final !== undefined &&
         formData.y_final !== undefined
       ) {
         points = rasterizeBezier(
-          { x: Number(formData.x_inicial), y: Number(formData.y_inicial) },
-          { x: Number(formData.x_controle1), y: Number(formData.y_controle1) },
-          { x: Number(formData.x_controle2), y: Number(formData.y_controle2) },
+          { x: Number(formData.x_start), y: Number(formData.y_start) },
+          { x: Number(formData.x_control1), y: Number(formData.y_control1) },
+          { x: Number(formData.x_control2), y: Number(formData.y_control2) },
           { x: Number(formData.x_final), y: Number(formData.y_final) }
         );
       }
