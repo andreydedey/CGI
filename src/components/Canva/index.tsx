@@ -11,7 +11,7 @@ interface PixelGridProps {
 export default function Canva({
   width = 800,
   height = 400,
-  cellSize = 15,
+  cellSize = 10,
   pixels = [],
 }: PixelGridProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -44,7 +44,7 @@ export default function Canva({
     pixels.forEach(({ x, y }) => {
       ctx.fillStyle = "blue";
       const canvasX = x * cellSize;
-      const canvasY = height - (y + 1) * cellSize + 5;
+      const canvasY = height - (y + 1) * cellSize + 11;
       const size = cellSize - 1;
       ctx.fillRect(canvasX, canvasY, size, size);
     });
