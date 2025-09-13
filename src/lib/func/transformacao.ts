@@ -7,7 +7,6 @@ export function translate(polygon: Point[], dx: number, dy: number): Point[] {
     }));
 }
 
-
 export function rotate(polygon: Point[], angleDeg: number, cx: number, cy: number): Point[] {
     const angleRad = (Math.PI / 180) * angleDeg;
     const cos = Math.cos(angleRad);
