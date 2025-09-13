@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { bresenhamLine } from "@/lib/func/bresenham";
 import { generateCircleOutlinePixels } from "@/lib/func/circulo";
-// Importe outros algoritmos conforme necessário
+import { rasterizePolyline } from "@/lib/func/polilinha";
+import { rasterizeBezier } from "@/lib/func/bezier";
 
 export function useCalculatePoints(formData: any) {
   return useMemo(() => {
@@ -35,6 +36,32 @@ export function useCalculatePoints(formData: any) {
           Number(formData.centroY),
           Number(formData.raio)
         ).map((p) => ({ x: p.x, y: p.y }));
+      }
+    }
+
+    if (algorithm === "polilinha") {
+      if (Array.isArray(formData.polilinha) && formData.polilinha.length >= 2) {
+        points = rasterizePolyline(formData.polilinha);
+      }
+    }
+
+    if (algorithm === "bezier") {
+      if (
+        formData.x_inicial !== undefined &&
+        formData.y_inicial !== undefined &&
+        formData.x_controle1 !== undefined &&
+        formData.y_controle1 !== undefined &&
+        formData.x_controle2 !== undefined &&
+        formData.y_controle2 !== undefined &&
+        formData.x_final !== undefined &&
+        formData.y_final !== undefined
+      ) {
+        points = rasterizeBezier(
+          { x: Number(formData.x_inicial), y: Number(formData.y_inicial) },
+          { x: Number(formData.x_controle1), y: Number(formData.y_controle1) },
+          { x: Number(formData.x_controle2), y: Number(formData.y_controle2) },
+          { x: Number(formData.x_final), y: Number(formData.y_final) }
+        );
       }
     }
 
