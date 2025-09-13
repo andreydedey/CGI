@@ -1,14 +1,5 @@
 import type { Pixel } from "@/components/Canva/config/pixel";
 
-/**
- * Algoritmo de Bresenham para linhas
- * @param x0 ponto inicial x
- * @param y0 ponto inicial y
- * @param x1 ponto final x
- * @param y1 ponto final y
- * @param color cor da linha
- * @returns array de pixels
- */
 export function bresenhamLine(
   x0: number,
   y0: number,
