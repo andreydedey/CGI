@@ -12,4 +12,4 @@ npm run dev
 ```
 
 ## Layout + Exemplo de uso
-![circulo](image.png)
+![circulo](public/image.png)
