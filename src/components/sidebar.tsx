@@ -20,6 +20,7 @@ import { Slider } from "@/components/ui/slider";
 import { useEffect } from "react";
 import type { Pixel } from "@/components/Canva/config/pixel";
 import { useCalculatePoints } from "@/hooks/calculatePoints";
+import { useCalculateTransformations } from "@/hooks/calculateTransformations";
 
 interface sidebarProps {
   onFormChange: (points: Pixel[]) => void;
@@ -30,7 +31,8 @@ const SideBar: React.FC<sidebarProps> = ({ onFormChange }) => {
   const formData = useWatch({ control: form.control });
   const algorithm = formData?.algorithm;
 
-  const points = useCalculatePoints(formData);
+  let points = useCalculatePoints(formData);
+  points = useCalculateTransformations(points, formData);
 
   useEffect(() => {
     onFormChange(points);
