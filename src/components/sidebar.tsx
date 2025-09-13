@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import {
   Form,
   FormField,
@@ -18,20 +18,23 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { useEffect } from "react";
-import type { Point } from "@/lib/func/bezier";
+import type { Pixel } from "@/components/Canva/config/pixel";
+import { useCalculatePoints } from "@/hooks/calculatePoints";
 
 interface sidebarProps {
-  onFormChange: (data: Point[]) => void;
+  onFormChange: (points: Pixel[]) => void;
 }
 
 const SideBar: React.FC<sidebarProps> = ({ onFormChange }) => {
   const form = useForm();
-  const formData = form.watch();
-  const algorithm = form.watch("algorithm");
+  const formData = useWatch({ control: form.control });
+  const algorithm = formData?.algorithm;
+
+  const points = useCalculatePoints(formData);
 
   useEffect(() => {
-    onFormChange(formData);
-  }, [formData, onFormChange]);
+    onFormChange(points);
+  }, [points, onFormChange]);
 
   return (
     <div className="h-screen w-[20%] bg-slate-900 flex flex-col gap-8 p-8 overflow-y-auto">
